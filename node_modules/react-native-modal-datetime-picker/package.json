@@ -1,0 +1,72 @@
+{
+  "name": "react-native-modal-datetime-picker",
+  "version": "18.0.0",
+  "description": "A react-native datetime-picker for Android and iOS",
+  "main": "src/index.js",
+  "files": [
+    "src/",
+    "typings/"
+  ],
+  "typings": "typings/index.d.ts",
+  "keywords": [
+    "react-native",
+    "react",
+    "native",
+    "date",
+    "time",
+    "picker",
+    "android",
+    "ios"
+  ],
+  "author": "Mazzarolo Matteo",
+  "license": "MIT",
+  "homepage": "https://github.com/mmazzarolo/react-native-modal-datetime-picker",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mmazzarolo/react-native-modal-datetime-picker"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "lint:fix": "yarn lint --fix",
+    "test": "yarn run lint",
+    "release": "yarn semantic-release",
+    "example:setup": "cd example && yarn setup",
+    "example:copy": "cd example && yarn copy",
+    "example:android": "cd example && react-native run-android",
+    "example:ios": "cd example && react-native run-ios"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2"
+  },
+  "devDependencies": {
+    "@semantic-release/git": "^9.0.0",
+    "eslint": "^7.11.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react-app": "^6.2.2",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.4.0",
+    "prettier": "^2.1.2",
+    "semantic-release": "^17.1.2"
+  },
+  "peerDependencies": {
+    "@react-native-community/datetimepicker": ">=6.7.0",
+    "react-native": ">=0.65.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "yarn lint:fix"
+    ],
+    "*.json": [
+      "prettier --write"
+    ],
+    "*.md": [
+      "prettier --write"
+    ]
+  }
+}
