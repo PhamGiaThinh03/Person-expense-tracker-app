@@ -1,0 +1,48 @@
+---------------------------------|---------|----------|---------|---------|-------------------
+File                             | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+---------------------------------|---------|----------|---------|---------|-------------------
+All files                        |       0 |        0 |       0 |       0 |                   
+ Components                      |       0 |        0 |       0 |       0 |                   
+  AddCustomCategoryModal.tsx     |       0 |        0 |       0 |       0 | 24-76             
+  Button.js                      |       0 |      100 |       0 |       0 | 4-12              
+  ScreenWrapper.tsx              |       0 |        0 |       0 |       0 | 19-56             
+ Navigation                      |       0 |        0 |       0 |       0 |                   
+  AppNavigator.js                |       0 |      100 |       0 |       0 | 7-10              
+  AppNavigator.tsx               |       0 |        0 |       0 |       0 | 8-35              
+  HomeStackNavigator.tsx         |       0 |      100 |       0 |       0 | 8-11              
+ Redux                           |       0 |      100 |     100 |       0 |                   
+  rootReducer.js                 |       0 |      100 |     100 |       0 | 4                 
+  store.js                       |       0 |      100 |     100 |       0 | 4                 
+  store.ts                       |       0 |      100 |     100 |       0 | 5                 
+ Redux/Slices                    |       0 |        0 |       0 |       0 |                   
+  financialSlice.js              |       0 |        0 |       0 |       0 | 3-137             
+  financialSlice.ts              |       0 |        0 |       0 |       0 | 43-229            
+  userSlice.ts                   |       0 |      100 |       0 |       0 | 13-32             
+ Screens                         |       0 |        0 |       0 |       0 |                   
+  AddBudgetScreen.tsx            |       0 |        0 |       0 |       0 | 19-250            
+  AddExpenseScreen.tsx           |       0 |        0 |       0 |       0 | 17-166            
+  AddIncomeScreen.tsx            |       0 |        0 |       0 |       0 | 17-181            
+  ChartScreen.tsx                |       0 |        0 |       0 |       0 | 22-306            
+  EditBudgetScreen.tsx           |       0 |        0 |       0 |       0 | 17-314            
+  EditTransactionScreen.tsx      |       0 |        0 |       0 |       0 | 17-279            
+  HomeScreen.js                  |       0 |      100 |       0 |       0 | 4-12              
+  HomeScreen.tsx                 |       0 |        0 |       0 |       0 | 64-417            
+  OnboardingScreen.tsx           |       0 |      100 |       0 |       0 | 9-29              
+  PersonalInformationScreen.tsx  |       0 |        0 |       0 |       0 | 17-149            
+  SelectBudgetCategoryScreen.tsx |       0 |        0 |       0 |       0 | 17-138            
+  SelectExpenseScreen.tsx        |       0 |        0 |       0 |       0 | 16-100            
+  SelectIncomeScreen.tsx         |       0 |        0 |       0 |       0 | 9-80              
+  SettingScreen.tsx              |       0 |        0 |       0 |       0 | 17-132            
+  SettingsScreen.tsx             |       0 |        0 |       0 |       0 | 14-78             
+ Services                        |       0 |        0 |       0 |       0 |                   
+  api.js                         |       0 |        0 |       0 |       0 | 3-15              
+ Theme                           |       0 |      100 |     100 |       0 |                   
+  theme.ts                       |       0 |      100 |     100 |       0 | 1                 
+ Utils                           |       0 |        0 |       0 |       0 |                   
+  analytics.ts                   |       0 |        0 |       0 |       0 | 37-249            
+  helpers.js                     |       0 |      100 |       0 |       0 | 1-18              
+ i18n                            |       0 |        0 |       0 |       0 |                   
+  translations.ts                |       0 |        0 |       0 |       0 | 16-270            
+ types                           |       0 |        0 |       0 |       0 |                   
+  navigation.ts                  |       0 |        0 |       0 |       0 |                   
+---------------------------------|---------|----------|---------|---------|-------------------
