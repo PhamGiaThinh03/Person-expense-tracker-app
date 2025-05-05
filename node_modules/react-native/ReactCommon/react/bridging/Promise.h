@@ -34,9 +34,8 @@ class AsyncPromise {
             },
             jsInvoker));
 
-    auto promiseHolder =
-        std::make_shared<PromiseHolder>(rt, promise.asObject(rt));
-    LongLivedObjectCollection::get(rt).add(promiseHolder);
+    auto promiseHolder = std::make_shared<PromiseHolder>(promise.asObject(rt));
+    LongLivedObjectCollection::get().add(promiseHolder);
 
     // The shared state can retain the promise holder weakly now.
     state_->promiseHolder = promiseHolder;
@@ -72,8 +71,7 @@ class AsyncPromise {
 
  private:
   struct PromiseHolder : LongLivedObject {
-    PromiseHolder(jsi::Runtime& runtime, jsi::Object p)
-        : LongLivedObject(runtime), promise(std::move(p)) {}
+    PromiseHolder(jsi::Object p) : promise(std::move(p)) {}
 
     jsi::Object promise;
   };

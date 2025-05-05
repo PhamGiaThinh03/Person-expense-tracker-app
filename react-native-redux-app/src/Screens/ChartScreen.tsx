@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   TextInput,
   Modal,
+  Platform,
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { LineChart } from 'react-native-chart-kit';
@@ -137,8 +138,14 @@ const ChartScreen = () => {
   const filteredTransactions = getFilteredTransactions();
   
   // Prepare data for the chart
+  // Chỉ hiển thị các ngày 1, 5, 10, 15, 20, 25, 30 (nếu có)
+  const daysInMonth = dayjs(selectedMonth).daysInMonth();
+  const labelIndexes = [0, 4, 9, 14, 19, 24, 29].filter(i => i < daysInMonth);
+
   const chartData = {
-    labels: dailyExpenses.map(d => dayjs(d.date).format('DD/MM')),
+    labels: dailyExpenses.map((d, i) =>
+      labelIndexes.includes(i) ? dayjs(d.date).format('DD') : ''
+    ),
     datasets: [{
       data: dailyExpenses.map(d => d.total),
     }],
@@ -228,7 +235,20 @@ const ChartScreen = () => {
           )}
 
           {filteredTransactions.map(transaction => (
-            <TouchableOpacity key={transaction.id} style={styles.transactionItem}>
+            <TouchableOpacity
+              key={transaction.id}
+              style={styles.transactionItem}
+              onPress={() => router.push({
+                pathname: '/EditTransactionScreen',
+                params: {
+                  id: transaction.id,
+                  type: transaction.type,
+                  title: transaction.title,
+                  amount: transaction.amount,
+                  date: transaction.date,
+                }
+              })}
+            >
               <View style={styles.transactionLeft}>
                 <View style={[
                   styles.transactionIcon,
@@ -254,30 +274,31 @@ const ChartScreen = () => {
                 {transaction.type === 'expense' ? '- ' : '+ '}
                 {transaction.amount.toLocaleString('vi-VN')} đ
               </Text>
+              <Ionicons name="chevron-forward" size={20} color="#666" />
             </TouchableOpacity>
           ))}
         </View>
       </View>
 
-      {/* Bottom Tab Bar */}
-      <View style={styles.tabBar}>
-        <TouchableOpacity 
-          style={styles.tabItem}
-          onPress={() => router.push('/home')}
-        >
-          <Ionicons name="home-outline" size={28} color="#666" />
+      {/* Bottom Navigation Icons */}
+      <View style={styles.bottomNavIcons}>
+        <TouchableOpacity accessibilityLabel="Home" onPress={() => router.push('/home')}>
+          <Ionicons name="home-outline" size={28} color="#666" style={styles.navIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.tabItem}>
-          <Ionicons name="stats-chart" size={28} color="#2F80ED" />
-          <View style={styles.selectedIndicator} />
+        <TouchableOpacity accessibilityLabel="Statistics" onPress={() => router.push('/chart')}>
+          <Ionicons name="stats-chart" size={28} color="#2F80ED" style={styles.navIcon} />
         </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.tabItem}
-          onPress={() => router.push('/settings')}
-        >
-          <Ionicons name="settings-outline" size={28} color="#666" />
+        <TouchableOpacity accessibilityLabel="Settings" onPress={() => router.push('/settings')}>
+          <Ionicons name="settings-outline" size={28} color="#666" style={styles.navIcon} />
         </TouchableOpacity>
       </View>
+
+      {/* Home Indicator */}
+      {Platform.OS === "ios" && (
+        <View style={styles.homeIndicatorContainer}>
+          <View style={styles.homeIndicator} />
+        </View>
+      )}
     </SafeAreaView>
   );
 };
@@ -417,25 +438,33 @@ const styles = StyleSheet.create({
   incomeText: {
     color: '#2F80ED',
   },
-  tabBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    paddingVertical: 12,
-    backgroundColor: '#FFFFFF',
-    borderTopWidth: 1,
-    borderTopColor: '#E0E0E0',
+  bottomNavIcons: {
+    alignSelf: "center",
+    display: "flex",
+    marginTop: 39,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 102,
   },
-  tabItem: {
-    alignItems: 'center',
-    padding: 8,
+  navIcon: {
+    aspectRatio: 1,
+    width: 28,
+    height: 28,
   },
-  selectedIndicator: {
-    width: 4,
-    height: 4,
-    borderRadius: 2,
-    backgroundColor: '#2F80ED',
-    marginTop: 4,
+  homeIndicatorContainer: {
+    display: "flex",
+    width: "100%",
+    paddingHorizontal: 80,
+    paddingTop: 30,
+    paddingBottom: Platform.OS === "ios" ? 8 : 0,
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  homeIndicator: {
+    borderRadius: 100,
+    width: 144,
+    height: 5,
+    backgroundColor: "#E0E0E0",
   },
 });
 

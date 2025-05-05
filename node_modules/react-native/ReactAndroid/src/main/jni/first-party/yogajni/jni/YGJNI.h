@@ -36,7 +36,7 @@ class YGNodeEdges {
     BORDER = 4,
   };
 
-  explicit YGNodeEdges(YGNodeRef node) {
+  YGNodeEdges(YGNodeRef node) {
     auto context = YGNodeContext{};
     context.asVoidPtr = YGNodeGetContext(node);
     edges_ = context.edgesSet;

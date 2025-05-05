@@ -74,10 +74,10 @@ const links = [
   },
   {
     id: 9,
-    title: 'Follow us',
-    link: 'https://x.com/reactnative',
+    title: 'Follow us on Twitter',
+    link: 'https://twitter.com/reactnative',
     description:
-      'Stay in touch with the community, join in on Q&As and more by following React Native on X.',
+      'Stay in touch with the community, join in on Q&As and more by following React Native on Twitter.',
   },
 ];
 

@@ -17,7 +17,7 @@ class JNativeModulePerfLogger
     : public jni::HybridClass<JNativeModulePerfLogger> {
  public:
   static auto constexpr kJavaDescriptor =
-      "Lcom/facebook/react/reactperflogger/NativeModulePerfLogger;";
+      "Lcom/facebook/react/perflogger/NativeModulePerfLogger;";
 
   virtual std::unique_ptr<facebook::react::NativeModulePerfLogger> get() = 0;
 

@@ -61,7 +61,7 @@ class ComponentDescriptorProviderRegistry final {
   mutable std::shared_mutex mutex_;
   mutable std::vector<std::weak_ptr<const ComponentDescriptorRegistry>>
       componentDescriptorRegistries_;
-  mutable std::unordered_map<ComponentHandle, const ComponentDescriptorProvider>
+  mutable std::unordered_map<ComponentHandle, ComponentDescriptorProvider const>
       componentDescriptorProviders_;
   mutable ComponentDescriptorProviderRequest
       componentDescriptorProviderRequest_{};

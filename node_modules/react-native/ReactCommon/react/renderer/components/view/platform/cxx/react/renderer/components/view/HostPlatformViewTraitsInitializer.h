@@ -20,4 +20,8 @@ inline bool formsView(const ViewProps& props) {
   return false;
 }
 
+inline ShadowNodeTraits::Trait extraTraits() {
+  return ShadowNodeTraits::Trait::None;
+}
+
 } // namespace facebook::react::HostPlatformViewTraitsInitializer

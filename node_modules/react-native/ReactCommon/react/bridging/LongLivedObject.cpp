@@ -6,27 +6,13 @@
  */
 
 #include "LongLivedObject.h"
-#include <unordered_map>
 
 namespace facebook::react {
 
 // LongLivedObjectCollection
-
-LongLivedObjectCollection& LongLivedObjectCollection::get(
-    jsi::Runtime& runtime) {
-  static std::unordered_map<void*, std::shared_ptr<LongLivedObjectCollection>>
-      instances;
-  static std::mutex instancesMutex;
-
-  std::scoped_lock lock(instancesMutex);
-  void* key = static_cast<void*>(&runtime);
-  auto entry = instances.find(key);
-  if (entry == instances.end()) {
-    entry =
-        instances.emplace(key, std::make_shared<LongLivedObjectCollection>())
-            .first;
-  }
-  return *(entry->second);
+LongLivedObjectCollection& LongLivedObjectCollection::get() {
+  static LongLivedObjectCollection instance;
+  return instance;
 }
 
 void LongLivedObjectCollection::add(std::shared_ptr<LongLivedObject> so) {
@@ -57,7 +43,7 @@ size_t LongLivedObjectCollection::size() const {
 // LongLivedObject
 
 void LongLivedObject::allowRelease() {
-  LongLivedObjectCollection::get(runtime_).remove(this);
+  LongLivedObjectCollection::get().remove(this);
 }
 
 } // namespace facebook::react

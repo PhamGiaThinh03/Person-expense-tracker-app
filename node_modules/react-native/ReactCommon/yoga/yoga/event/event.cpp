@@ -40,14 +40,14 @@ struct Node {
   std::function<Event::Subscriber> subscriber = nullptr;
   Node* next = nullptr;
 
-  explicit Node(std::function<Event::Subscriber>&& subscriber)
+  Node(std::function<Event::Subscriber>&& subscriber)
       : subscriber{std::move(subscriber)} {}
 };
 
 std::atomic<Node*> subscribers{nullptr};
 
 Node* push(Node* newHead) {
-  Node* oldHead = nullptr;
+  Node* oldHead;
   do {
     oldHead = subscribers.load(std::memory_order_relaxed);
     if (newHead != nullptr) {

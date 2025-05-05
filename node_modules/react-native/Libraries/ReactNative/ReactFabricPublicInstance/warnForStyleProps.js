@@ -16,7 +16,6 @@ export default function warnForStyleProps(
 ): void {
   if (__DEV__) {
     for (const key in validAttributes.style) {
-      // $FlowFixMe[invalid-computed-prop]
       if (!(validAttributes[key] || props[key] === undefined)) {
         console.error(
           'You are setting the style `{ %s' +

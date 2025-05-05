@@ -9,14 +9,12 @@ package com.facebook.react.uimanager;
 
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.ImageView;
-import com.facebook.infer.annotation.Nullsafe;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.events.TouchEventType;
 import java.util.Map;
 
 /** Constants exposed to JS from {@link UIManagerModule}. */
-/* package */ @Nullsafe(Nullsafe.Mode.LOCAL)
-class UIManagerModuleConstants {
+/* package */ class UIManagerModuleConstants {
 
   public static final String ACTION_DISMISSED = "dismissed";
   public static final String ACTION_ITEM_SELECTED = "itemSelected";
@@ -103,6 +101,11 @@ class UIManagerModuleConstants {
                 PointerEvents.BOX_ONLY.ordinal(),
                 "unspecified",
                 PointerEvents.AUTO.ordinal())));
+
+    constants.put(
+        "PopupMenu",
+        MapBuilder.of(
+            ACTION_DISMISSED, ACTION_DISMISSED, ACTION_ITEM_SELECTED, ACTION_ITEM_SELECTED));
 
     constants.put(
         "AccessibilityEventTypes",

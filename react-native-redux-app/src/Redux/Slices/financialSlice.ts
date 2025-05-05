@@ -146,6 +146,42 @@ const financialSlice = createSlice({
     setSearchQuery: (state, action: PayloadAction<string>) => {
       state.searchQuery = action.payload;
     },
+    updateTransaction: (state, action: PayloadAction<{ id: string; updates: Partial<Transaction> }>) => {
+      const transaction = state.transactions.find(t => t.id === action.payload.id);
+      if (transaction) {
+        // Trừ giá trị cũ khỏi income/expense/balance
+        if (transaction.type === 'income') {
+          state.income -= transaction.amount;
+          state.balance -= transaction.amount;
+        } else {
+          state.expense -= transaction.amount;
+          state.balance += transaction.amount;
+        }
+        // Cập nhật transaction
+        Object.assign(transaction, action.payload.updates);
+        // Cộng lại giá trị mới
+        if (transaction.type === 'income') {
+          state.income += transaction.amount;
+          state.balance += transaction.amount;
+        } else {
+          state.expense += transaction.amount;
+          state.balance -= transaction.amount;
+        }
+      }
+    },
+    deleteTransaction: (state, action: PayloadAction<string>) => {
+      const transaction = state.transactions.find(t => t.id === action.payload);
+      if (transaction) {
+        if (transaction.type === 'income') {
+          state.income -= transaction.amount;
+          state.balance -= transaction.amount;
+        } else {
+          state.expense -= transaction.amount;
+          state.balance += transaction.amount;
+        }
+      }
+      state.transactions = state.transactions.filter(t => t.id !== action.payload);
+    },
   },
 });
 
@@ -154,6 +190,8 @@ export const {
   addBudget,
   updateBudget,
   deleteBudget,
+  updateTransaction,
+  deleteTransaction,
   setSelectedIncomeType,
   setSelectedExpenseType,
   setSelectedDate,
@@ -161,9 +199,9 @@ export const {
 } = financialSlice.actions;
 
 // Selectors
-export const selectBalance = (state: RootState) => state.financial.balance;
-export const selectIncome = (state: RootState) => state.financial.income;
-export const selectExpense = (state: RootState) => state.financial.expense;
+export const selectBalance = (state: RootState) => state.financial.transactions.reduce((sum, t) => sum + (t.type === 'income' ? t.amount : -t.amount), 0);
+export const selectIncome = (state: RootState) => state.financial.transactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
+export const selectExpense = (state: RootState) => state.financial.transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
 export const selectBudgets = (state: RootState) => state.financial.budgets;
 export const selectPlans = (state: RootState) => state.financial.plans;
 export const selectFilteredTransactions = (state: RootState) => {

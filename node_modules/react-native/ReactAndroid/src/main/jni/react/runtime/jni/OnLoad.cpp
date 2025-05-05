@@ -9,7 +9,6 @@
 #include <react/jni/JReactMarker.h>
 
 #include "JJSTimerExecutor.h"
-#include "JReactHostInspectorTarget.h"
 #include "JReactInstance.h"
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* /*unused*/) {
@@ -17,6 +16,5 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* /*unused*/) {
     facebook::react::JReactMarker::setLogPerfMarkerIfNeeded();
     facebook::react::JReactInstance::registerNatives();
     facebook::react::JJSTimerExecutor::registerNatives();
-    facebook::react::JReactHostInspectorTarget::registerNatives();
   });
 }

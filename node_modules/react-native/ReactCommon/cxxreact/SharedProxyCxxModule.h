@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#pragma once
-
 #include <memory>
 
 #include <cxxreact/CxxModule.h>

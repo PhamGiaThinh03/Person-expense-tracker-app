@@ -63,9 +63,7 @@ jsi::Array deepCopyJSIArray(jsi::Runtime& rt, const jsi::Array& arr) {
 }
 
 Promise::Promise(jsi::Runtime& rt, jsi::Function resolve, jsi::Function reject)
-    : LongLivedObject(rt),
-      resolve_(std::move(resolve)),
-      reject_(std::move(reject)) {}
+    : runtime_(rt), resolve_(std::move(resolve)), reject_(std::move(reject)) {}
 
 void Promise::resolve(const jsi::Value& result) {
   resolve_.call(runtime_, result);

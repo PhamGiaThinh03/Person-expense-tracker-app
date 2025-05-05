@@ -9,6 +9,12 @@
 #import <React/RCTInvalidating.h>
 #import <React/RCTViewManager.h>
 
+@interface RCTConvert (RCTModalHostView)
+
++ (UIModalPresentationStyle)UIModalPresentationStyle:(id)json;
+
+@end
+
 typedef void (^RCTModalViewInteractionBlock)(
     UIViewController *reactViewController,
     UIViewController *viewController,

@@ -25,7 +25,7 @@ YogaJniException::YogaJniException(jthrowable throwable) {
   throwable_ = newGlobalRef(getCurrentEnv(), throwable);
 }
 
-YogaJniException::YogaJniException(YogaJniException&& rhs) noexcept
+YogaJniException::YogaJniException(YogaJniException&& rhs)
     : throwable_(std::move(rhs.throwable_)) {}
 
 YogaJniException::YogaJniException(const YogaJniException& rhs) {

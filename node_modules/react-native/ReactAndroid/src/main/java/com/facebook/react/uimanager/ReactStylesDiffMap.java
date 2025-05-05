@@ -9,7 +9,6 @@ package com.facebook.react.uimanager;
 
 import android.view.View;
 import androidx.annotation.Nullable;
-import com.facebook.infer.annotation.Nullsafe;
 import com.facebook.react.bridge.Dynamic;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
@@ -33,7 +32,6 @@ import java.util.Map;
  * shouldn't be updated (whereas in all other cases it should be updated to the new value or the
  * property should be reset).
  */
-@Nullsafe(Nullsafe.Mode.LOCAL)
 public class ReactStylesDiffMap {
 
   /* package */ final ReadableMap mBackingMap;

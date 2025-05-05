@@ -104,7 +104,6 @@ class MapBuffer {
     Double = 2,
     String = 3,
     Map = 4,
-    Long = 5,
   };
 
   explicit MapBuffer(std::vector<uint8_t> data);
@@ -118,8 +117,6 @@ class MapBuffer {
   MapBuffer& operator=(MapBuffer&& other) = default;
 
   int32_t getInt(MapBuffer::Key key) const;
-
-  int64_t getLong(MapBuffer::Key key) const;
 
   bool getBool(MapBuffer::Key key) const;
 

@@ -15,7 +15,7 @@ import com.facebook.react.common.MapBuilder;
 import java.util.Map;
 
 /** Responsible for dispatching events specific for hardware inputs. */
-class ReactAndroidHWInputDeviceHelper {
+public class ReactAndroidHWInputDeviceHelper {
 
   /**
    * Contains a mapping between handled KeyEvents and the corresponding navigation event that should

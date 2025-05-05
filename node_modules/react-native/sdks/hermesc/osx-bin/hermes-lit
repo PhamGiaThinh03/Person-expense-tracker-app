@@ -8,7 +8,7 @@ import os
 import sys
 
 # Make sure we can find the lit package.
-sys.path.insert(0, os.path.join("/Users/runner/work/react-native/react-native/packages/react-native/sdks/hermes/external/llvh", 'utils', 'lit'))
+sys.path.insert(0, os.path.join("/Users/distiller/react-native/packages/react-native/sdks/hermes/external/llvh", 'utils', 'lit'))
 
 if __name__=='__main__':
     from lit.main import main

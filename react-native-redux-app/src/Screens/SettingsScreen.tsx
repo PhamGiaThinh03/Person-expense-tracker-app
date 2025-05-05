@@ -45,7 +45,7 @@ const SettingsScreen = () => {
             <Text style={styles.listItemText}>Personal information</Text>
             <Ionicons name="chevron-forward" size={20} color="#666" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.listItem}>
+          <TouchableOpacity style={styles.listItem} onPress={() => router.replace('/onboarding')}>
             <Text style={styles.listItemText}>Sign out</Text>
             <Ionicons name="chevron-forward" size={20} color="#666" />
           </TouchableOpacity>

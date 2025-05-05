@@ -22,9 +22,9 @@ class YogaJniException : public std::exception {
 
   explicit YogaJniException(jthrowable throwable);
 
-  YogaJniException(YogaJniException&& rhs) noexcept;
+  YogaJniException(YogaJniException&& rhs);
 
-  YogaJniException(const YogaJniException& rhs);
+  YogaJniException(const YogaJniException& other);
 
   ScopedLocalRef<jthrowable> getThrowable() const noexcept;
 

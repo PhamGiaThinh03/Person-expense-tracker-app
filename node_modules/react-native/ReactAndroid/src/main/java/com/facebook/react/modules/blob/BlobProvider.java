@@ -27,7 +27,7 @@ public final class BlobProvider extends ContentProvider {
 
   private static final int PIPE_CAPACITY = 65536;
 
-  private final ExecutorService executor = Executors.newSingleThreadExecutor();
+  private ExecutorService executor = Executors.newSingleThreadExecutor();
 
   @Override
   public boolean onCreate() {
@@ -61,8 +61,7 @@ public final class BlobProvider extends ContentProvider {
   }
 
   @Override
-  public @Nullable ParcelFileDescriptor openFile(Uri uri, String mode)
-      throws FileNotFoundException {
+  public ParcelFileDescriptor openFile(Uri uri, String mode) throws FileNotFoundException {
     if (!mode.equals("r")) {
       throw new FileNotFoundException("Cannot open " + uri.toString() + " in mode '" + mode + "'");
     }
@@ -81,7 +80,7 @@ public final class BlobProvider extends ContentProvider {
 
     final byte[] data = blobModule.resolve(uri);
     if (data == null) {
-      throw new FileNotFoundException("Cannot open " + uri + ", blob not found.");
+      throw new FileNotFoundException("Cannot open " + uri.toString() + ", blob not found.");
     }
 
     ParcelFileDescriptor[] pipe;

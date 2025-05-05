@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <folly/dynamic.h>
+#include <memory>
 #include <string>
 
 namespace facebook::react {

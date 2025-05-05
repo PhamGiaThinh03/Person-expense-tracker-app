@@ -14,7 +14,7 @@ import {
   FlatList,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { router } from 'expo-router';
+import { router, useRouter } from 'expo-router';
 import { ThemedView } from "../../components/ThemedView";
 import { ThemedText } from "../../components/ThemedText";
 import { Ionicons, MaterialIcons, FontAwesome } from '@expo/vector-icons';
@@ -67,12 +67,14 @@ const formatNumber = (num: number) => {
 
 // Budget Item Component
 const BudgetItem = ({
+  id,
   category,
   startDate,
   endDate,
   amount,
   spentAmount,
 }: {
+  id: string;
   category: string;
   startDate: string;
   endDate: string;
@@ -83,6 +85,7 @@ const BudgetItem = ({
   const isSmallScreen = width < 360;
   const progress = Math.min((spentAmount / amount) * 100, 100); // Cap at 100%
   const remaining = amount - spentAmount;
+  const router = useRouter();
   
   // Determine progress bar color based on percentage spent
   const getProgressColor = () => {
@@ -92,12 +95,15 @@ const BudgetItem = ({
   };
 
   return (
-    <TouchableOpacity style={styles.budgetItem}>
+    <View style={styles.budgetItem}>
       <View style={styles.budgetHeader}>
         <View style={styles.budgetIcon}>
           <FontAwesome name="money" size={20} color="#2F80ED" />
         </View>
         <Text style={styles.budgetTitle}>{category}</Text>
+        <TouchableOpacity onPress={() => router.push({ pathname: '/edit-budget-screen', params: { id, category, amount, startDate, endDate } })}>
+          <MaterialIcons name="arrow-forward-ios" size={18} color="#666" />
+        </TouchableOpacity>
       </View>
       <View style={styles.budgetDates}>
         <Text style={styles.budgetDate}>{startDate}</Text>
@@ -141,17 +147,19 @@ const BudgetItem = ({
           {progress.toFixed(1)}%
         </Text>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
 // Transaction Item Component
 const TransactionItem = ({
+  id,
   type,
   title,
   date,
   amount,
 }: {
+  id: string;
   type: 'income' | 'expense';
   title: string;
   date: string;
@@ -159,6 +167,7 @@ const TransactionItem = ({
 }) => {
   const isExpense = type === 'expense';
   const formattedAmount = `${isExpense ? '-' : '+'} ${formatNumber(amount)} đ`;
+  const router = useRouter();
 
   return (
     <TouchableOpacity style={styles.transactionItem}>
@@ -169,17 +178,19 @@ const TransactionItem = ({
           ) : (
             <MaterialIcons name="arrow-upward" size={20} color="#2F80ED" />
           )}
-          </View>
-          <View>
+        </View>
+        <View>
           <Text style={styles.transactionTitle}>{title}</Text>
           <Text style={styles.transactionDate}>{date}</Text>
-          </View>
         </View>
+      </View>
       <View style={styles.transactionRight}>
         <Text style={[styles.transactionAmount, isExpense ? styles.expenseText : styles.incomeText]}>
-            {formattedAmount}
+          {formattedAmount}
         </Text>
-        <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+        <TouchableOpacity onPress={() => router.push({ pathname: '/edit-transaction-screen', params: { id, type, title, amount, date } })}>
+          <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   );
@@ -339,6 +350,7 @@ const HomeScreen = () => {
               transactions.map((transaction: Transaction) => (
                 <TransactionItem
                   key={transaction.id}
+                  id={transaction.id}
                   type={transaction.type}
                   title={transaction.title}
                   date={transaction.date}
@@ -362,6 +374,7 @@ const HomeScreen = () => {
               budgets.map((budget) => (
                 <BudgetItem
                   key={budget.id}
+                  id={budget.id}
                   category={budget.category}
                   startDate={budget.startDate}
                   endDate={budget.endDate}

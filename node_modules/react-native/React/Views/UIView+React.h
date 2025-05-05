@@ -8,16 +8,10 @@
 #import <UIKit/UIKit.h>
 
 #import <React/RCTComponent.h>
-#import <React/RCTConvert.h>
+#import <React/RCTTransformOrigin.h>
 #import <yoga/YGEnums.h>
 
 @class RCTShadowView;
-
-typedef struct {
-  YGValue x;
-  YGValue y;
-  CGFloat z;
-} RCTTransformOrigin;
 
 @interface UIView (React) <RCTComponent>
 
