@@ -33,6 +33,24 @@ export default function Layout() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="add-budget"
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="select-budget-category"
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="chart"
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 } 

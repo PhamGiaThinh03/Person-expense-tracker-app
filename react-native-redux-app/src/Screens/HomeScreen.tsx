@@ -14,7 +14,7 @@ import {
   FlatList,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from 'expo-router';
+import { router } from 'expo-router';
 import { ThemedView } from "../../components/ThemedView";
 import { ThemedText } from "../../components/ThemedText";
 import { Ionicons, MaterialIcons, FontAwesome } from '@expo/vector-icons';
@@ -245,7 +245,6 @@ const ActionButton: React.FC<ActionButtonProps> = ({ icon, label, onPress }) => 
 );
 
 const HomeScreen = () => {
-  const router = useRouter();
   const dispatch = useDispatch();
 
   // Redux selectors
@@ -264,15 +263,15 @@ const HomeScreen = () => {
 
   // Action handlers
   const handleAddTransaction = () => {
-    console.log("Add transaction");
+    router.push('/add-income');
   };
 
   const handleAddBudget = () => {
-    console.log("Add budget");
+    router.push('/select-income');
   };
 
   const handleAddPlan = () => {
-    console.log("Add plan");
+    router.push('/home');
   };
 
   return (
@@ -355,7 +354,7 @@ const HomeScreen = () => {
           <View style={[styles.section, styles.budgetSection]}>
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Budget</Text>
-              <TouchableOpacity onPress={() => router.push('/add-budget' as any)}>
+              <TouchableOpacity onPress={() => router.push('/add-budget')}>
                 <Text style={styles.addButton}>Add budget</Text>
               </TouchableOpacity>
             </View>
@@ -379,17 +378,14 @@ const HomeScreen = () => {
 
       {/* Bottom Navigation Icons */}
       <View style={styles.bottomNavIcons}>
-        <TouchableOpacity accessibilityLabel="Home">
-          <Ionicons name="home" size={28} color="#2F80ED" />
+        <TouchableOpacity accessibilityLabel="Home" onPress={() => router.push('/home')}>
+          <Ionicons name="home" size={28} color="#2F80ED" style={styles.navIcon} />
         </TouchableOpacity>
-        <TouchableOpacity 
-          accessibilityLabel="Statistics"
-          onPress={() => router.push('/chart')}
-        >
-          <Ionicons name="stats-chart" size={28} color="#666" />
+        <TouchableOpacity accessibilityLabel="Statistics" onPress={() => router.push('/chart')}>
+          <Ionicons name="stats-chart" size={28} color="#666" style={styles.navIcon} />
         </TouchableOpacity>
-        <TouchableOpacity accessibilityLabel="Profile">
-          <Ionicons name="person" size={28} color="#666" />
+        <TouchableOpacity accessibilityLabel="Settings" onPress={() => router.push('/settings')}>
+          <Ionicons name="settings-outline" size={28} color="#666" style={styles.navIcon} />
         </TouchableOpacity>
       </View>
 

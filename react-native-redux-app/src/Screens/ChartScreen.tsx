@@ -16,6 +16,7 @@ import dayjs from 'dayjs';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { RootState } from '../Redux/store';
+import { router } from 'expo-router';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -148,14 +149,15 @@ const ChartScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.push('/home')}>
+        <TouchableOpacity onPress={() => router.push('/home')} style={{ position: 'absolute', left: 16, zIndex: 1 }}>
           <Ionicons name="arrow-back" size={24} color="#000" />
         </TouchableOpacity>
-        <Text style={styles.title}>Spending chart</Text>
-        <View style={{ width: 24 }} />
+        <Text style={styles.headerTitle}>Analytics</Text>
       </View>
 
+      {/* Content */}
       <View style={styles.content}>
         <Text style={styles.monthLabel}>Report chart</Text>
         
@@ -256,6 +258,26 @@ const ChartScreen = () => {
           ))}
         </View>
       </View>
+
+      {/* Bottom Tab Bar */}
+      <View style={styles.tabBar}>
+        <TouchableOpacity 
+          style={styles.tabItem}
+          onPress={() => router.push('/home')}
+        >
+          <Ionicons name="home-outline" size={28} color="#666" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tabItem}>
+          <Ionicons name="stats-chart" size={28} color="#2F80ED" />
+          <View style={styles.selectedIndicator} />
+        </TouchableOpacity>
+        <TouchableOpacity 
+          style={styles.tabItem}
+          onPress={() => router.push('/settings')}
+        >
+          <Ionicons name="settings-outline" size={28} color="#666" />
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
@@ -263,21 +285,25 @@ const ChartScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F5F5F5',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 16,
+    justifyContent: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    backgroundColor: '#FFFFFF',
     borderBottomWidth: 1,
-    borderBottomColor: '#F0F0F0',
+    borderBottomColor: '#E0E0E0',
   },
-  title: {
-    fontSize: 20,
+  headerTitle: {
+    fontSize: 18,
     fontWeight: '600',
+    color: '#000',
   },
   content: {
+    flex: 1,
     padding: 16,
   },
   monthLabel: {
@@ -390,6 +416,26 @@ const styles = StyleSheet.create({
   },
   incomeText: {
     color: '#2F80ED',
+  },
+  tabBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingVertical: 12,
+    backgroundColor: '#FFFFFF',
+    borderTopWidth: 1,
+    borderTopColor: '#E0E0E0',
+  },
+  tabItem: {
+    alignItems: 'center',
+    padding: 8,
+  },
+  selectedIndicator: {
+    width: 4,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: '#2F80ED',
+    marginTop: 4,
   },
 });
 
